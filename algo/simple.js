@@ -1,0 +1,17 @@
+{ JobName string "yaml:\"job_name\"";
+ HonorLabels bool "yaml:\"honor_labels,omitempty\"";
+  HonorTimestamps bool "yaml:\"honor_timestamps\""; 
+  Params url.Values "yaml:\"params,omitempty\"";
+   ScrapeInterval model.Duration "yaml:\"scrape_interval,omitempty\"";
+    ScrapeTimeout model.Duration "yaml:\"scrape_timeout,omitempty\"";
+     MetricsPath string "yaml:\"metrics_path,omitempty\""; 
+     Scheme string "yaml:\"scheme,omitempty\""; 
+     BodySizeLimit units.Base2Bytes "yaml:\"body_size_limit,omitempty\""; 
+     SampleLimit uint "yaml:\"sample_limit,omitempty\""; 
+     TargetLimit uint "yaml:\"target_limit,omitempty\""; 
+     LabelLimit uint "yaml:\"label_limit,omitempty\"";
+      LabelNameLengthLimit uint "yaml:\"label_name_length_limit,omitempty\""; 
+      LabelValueLengthLimit uint "yaml:\"label_value_length_limit,omitempty\""; 
+      _ServiceDiscoveryConfigs struct {}; 
+      HTTPClientConfig config.HTTPClientConfig "yaml:\",inline\""; 
+      RelabelConfigs []*relabel.Config "yaml:\"relabel_configs,omitempty\""; MetricRelabelConfigs []*relabel.Config "yaml:\"metric_relabel_configs,omitempty\""; AUTO_DISCOVERY_azure_sd_configs []*azure.SDConfig "yaml:\"azure_sd_configs,omitempty\""; AUTO_DISCOVERY_consul_sd_configs []*consul.SDConfig "yaml:\"consul_sd_configs,omitempty\""; AUTO_DISCOVERY_digitalocean_sd_configs []*digitalocean.SDConfig "yaml:\"digitalocean_sd_configs,omitempty\""; AUTO_DISCOVERY_dns_sd_configs []*dns.SDConfig "yaml:\"dns_sd_configs,omitempty\""; AUTO_DISCOVERY_docker_sd_configs []*moby.DockerSDConfig "yaml:\"docker_sd_configs,omitempty\""; AUTO_DISCOVERY_dockerswarm_sd_configs []*moby.DockerSwarmSDConfig "yaml:\"dockerswarm_sd_configs,omitempty\""; AUTO_DISCOVERY_ec2_sd_configs []*aws.EC2SDConfig "yaml:\"ec2_sd_configs,omitempty\""; AUTO_DISCOVERY_eureka_sd_configs []*eureka.SDConfig "yaml:\"eureka_sd_configs,omitempty\""; AUTO_DISCOVERY_file_sd_configs []*file.SDConfig "yaml:\"file_sd_configs,omitempty\""; AUTO_DISCOVERY_gce_sd_configs []*gce.SDConfig "yaml:\"gce_sd_configs,omitempty\""; AUTO_DISCOVERY_hetzner_sd_configs []*hetzner.SDConfig "yaml:\"hetzner_sd_configs,omitempty\""; AUTO_DISCOVERY_http_sd_configs []*http.SDConfig "yaml:\"http_sd_configs,omitempty\""; AUTO_DISCOVERY_kubernetes_sd_configs []*kubernetes.SDConfig "yaml:\"kubernetes_sd_configs,omitempty\""; AUTO_DISCOVERY_kuma_sd_configs []*xds.SDConfig "yaml:\"kuma_sd_configs,omitempty\""; AUTO_DISCOVERY_lightsail_sd_configs []*aws.LightsailSDConfig "yaml:\"lightsail_sd_configs,omitempty\""; AUTO_DISCOVERY_linode_sd_configs []*linode.SDConfig "yaml:\"linode_sd_configs,omitempty\""; AUTO_DISCOVERY_marathon_sd_configs []*marathon.SDConfig "yaml:\"marathon_sd_configs,omitempty\""; AUTO_DISCOVERY_nerve_sd_configs []*zookeeper.NerveSDConfig "yaml:\"nerve_sd_configs,omitempty\""; AUTO_DISCOVERY_openstack_sd_configs []*openstack.SDConfig "yaml:\"openstack_sd_configs,omitempty\""; AUTO_DISCOVERY_scaleway_sd_configs []*scaleway.SDConfig "yaml:\"scaleway_sd_configs,omitempty\""; AUTO_DISCOVERY_serverset_sd_configs []*zookeeper.ServersetSDConfig "yaml:\"serverset_sd_configs,omitempty\""; AUTO_DISCOVERY_static_configs []*targetgroup.Group "yaml:\"static_configs,omitempty\""; AUTO_DISCOVERY_triton_sd_configs []*triton.SDConfig "yaml:\"triton_sd_configs,omitempty\"" }
