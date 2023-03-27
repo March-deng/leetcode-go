@@ -2489,3 +2489,165 @@ func convertTemperature(celsius float64) []float64 {
 		celsius*1.80 + 32.00,
 	}
 }
+
+func findUnsortedSubarray(nums []int) int {
+	// 找左右端点
+
+	var (
+		left  int
+		right int
+	)
+
+	for left = 0; left < len(nums)-1; {
+		if nums[left] > nums[left+1] {
+			break
+		}
+		left++
+	}
+
+	for right = len(nums) - 1; right > 0; {
+		if nums[right] < nums[right-1] {
+			break
+		}
+		right--
+	}
+
+	if left >= right {
+		return 0
+	}
+
+	var (
+		i   = left
+		j   = right
+		min int
+		max int
+	)
+
+	min = nums[i]
+
+	max = nums[j]
+
+	for k := i; k <= j; k++ {
+		if nums[k] < min {
+			for left >= 0 && nums[left] > nums[k] {
+				left--
+			}
+			// 更新最小值
+			if left < 0 {
+				min = -10000003
+			} else {
+				min = nums[left]
+			}
+		}
+
+		if nums[k] > max {
+			for right < len(nums) && nums[right] < nums[k] {
+				right++
+			}
+
+			if right >= len(nums) {
+				max = 10000003
+			} else {
+				max = nums[right]
+			}
+		}
+	}
+
+	if left == right {
+		return 0
+	}
+
+	return right - left + -1
+}
+
+func evenOddBit(n int) []int {
+	var (
+		even int
+		odd  int
+	)
+
+	var i int
+	for n != 0 {
+		if n&1 == 1 {
+			if i&1 == 0 {
+				even++
+			} else {
+				odd++
+			}
+		}
+
+		n = n >> 1
+		i++
+	}
+
+	return []int{even, odd}
+}
+
+func findSubarrays(nums []int) bool {
+	if len(nums) <= 1 {
+		return false
+	}
+	set := make(map[int]struct{})
+
+	for i := 0; i < len(nums)-1; i++ {
+		sum := nums[i] + nums[i+1]
+		_, ok := set[sum]
+		if ok {
+			return true
+		}
+		set[sum] = struct{}{}
+	}
+
+	return false
+}
+
+func findK(nums []int, k int) int {
+	var count int
+	for _, v := range nums {
+		if k == v {
+			count++
+		}
+	}
+
+	return count
+}
+
+type TreeNode struct {
+	// 序号
+	Serial int
+
+	Nodes []*TreeNode
+	// 边的权重
+	Weight int
+}
+
+func maxDist(root *TreeNode) int {
+	var dist int
+	var cur int
+	traverse(root, &dist, &cur)
+
+	return dist
+}
+
+func traverse(root *TreeNode, dist *int, cur *int) {
+	if root == nil {
+		return
+	}
+	*cur += root.Weight
+	if len(root.Nodes) == 0 {
+		if *cur > *dist {
+			*dist = *cur
+		}
+
+		*cur -= root.Weight
+
+		return
+	}
+
+	for _, node := range root.Nodes {
+		traverse(node, dist, cur)
+	}
+
+	*cur -= root.Weight
+
+}

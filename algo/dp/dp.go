@@ -1,6 +1,7 @@
 package dp
 
 import (
+	"log"
 	"math"
 )
 
@@ -544,4 +545,31 @@ func lengthOfLongestSubstring(s string) int {
 	}
 
 	return max
+}
+
+func maxProfitSellStock(prices []int) int {
+
+	if len(prices) <= 1 {
+		return 0
+	}
+	var (
+		profit   int
+		minPrice int = prices[0]
+	)
+
+	if len(prices) <= 1 {
+		return 0
+	}
+
+	for _, v := range prices[1:] {
+
+		profit = max(profit, v-minPrice)
+
+		log.Println(profit, minPrice)
+
+		minPrice = min(minPrice, v)
+	}
+
+	return profit
+
 }

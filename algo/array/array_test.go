@@ -453,3 +453,13 @@ func TestMergeSubArray(t *testing.T) {
 func TestSubArraySub(t *testing.T) {
 	log.Println(subarraySum([]int{1, 1, 1}, 2))
 }
+
+func TestFindUnsortedSubarray(t *testing.T) {
+	// fmt.Println(findUnsortedSubarray([]int{2, 6, 4, 8, 10, 9, 15}))
+	// log.Println(findUnsortedSubarray([]int{1, 3, 2, 2, 2}))
+	log.Println(findUnsortedSubarray([]int{1, 2, 3, 4}))
+}
+
+func TestEvenOddBit(t *testing.T) {
+	log.Println(evenOddBit(2))
+}

@@ -1,56 +1,58 @@
 package main
 
+import (
+	"fmt"
+	"log"
+	"time"
+)
+
 func main() {
 
-}
+	chs := runPrint(3)
 
-func findK(nums []int, k int) int {
-	var count int
-	for _, v := range nums {
-		if k == v {
-			count++
-		}
-	}
+	a := time.After(5 * time.Second)
 
-	return count
-}
+	select {
+	case <-a:
 
-type TreeNode struct {
-	// 序号
-	Serial int
-
-	Nodes []*TreeNode
-	// 边的权重
-	Weight int
-}
-
-func maxDist(root *TreeNode) int {
-	var dist int
-	var cur int
-	traverse(root, &dist, &cur)
-
-	return dist
-}
-
-func traverse(root *TreeNode, dist *int, cur *int) {
-	if root == nil {
-		return
-	}
-	*cur += root.Weight
-	if len(root.Nodes) == 0 {
-		if *cur > *dist {
-			*dist = *cur
+		for _, ch := range chs {
+			close(ch)
 		}
 
-		*cur -= root.Weight
-
-		return
 	}
 
-	for _, node := range root.Nodes {
-		traverse(node, dist, cur)
+	time.Sleep(5 * time.Minute)
+}
+
+func runPrint(n int) map[int]chan int {
+	chs := make(map[int]chan int, n)
+	for i := 1; i <= n; i++ {
+		chs[i] = make(chan int)
 	}
 
-	*cur -= root.Weight
+	for i := 1; i <= n; i++ {
+		go func(idx int) {
+			ch := chs[idx]
+			for {
+				select {
+				case v, ok := <-ch:
+					if !ok {
+						log.Printf("Num.%d exit \n", idx)
+						return
+					}
+					fmt.Print(v)
+					time.Sleep(500 * time.Millisecond)
+					nextChIdx := (idx + 1) % n
+					if nextChIdx == 0 {
+						nextChIdx = n
+					}
+					nextCh := chs[nextChIdx]
+					nextCh <- v + 1
+				}
+			}
+		}(i)
+	}
+	chs[1] <- 1
 
+	return chs
 }

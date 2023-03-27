@@ -75,3 +75,7 @@ func TestTranslateNum(t *testing.T) {
 func TestLengthOfLongestSubstring(t *testing.T) {
 	log.Println(lengthOfLongestSubstring("abcabcabc"))
 }
+
+func TestMaxProfitSellStock(t *testing.T) {
+	log.Println(maxProfitSellStock([]int{1, 2}))
+}

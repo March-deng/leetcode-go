@@ -121,3 +121,76 @@ func sumDigit(n int) int {
 
 	return sum
 }
+
+func checkValidGrid(grid [][]int) bool {
+	pairs := make([]pair, 8)
+
+	var (
+		row int
+		col int
+	)
+
+	for i := 0; i < len(grid)*len(grid[0])-1; i++ {
+		var getExpected bool
+		getAllAxis(row, col, pairs)
+		expected := grid[row][col] + 1
+
+		for _, p := range pairs {
+			if p.i < 0 || p.j < 0 || p.i >= len(grid) || p.j >= len(grid[0]) {
+				continue
+			}
+
+			if grid[p.i][p.j] == expected {
+				getExpected = true
+				row = p.i
+				col = p.j
+				break
+			}
+		}
+
+		if !getExpected {
+			// log.Println(expected)
+			return false
+		}
+
+	}
+
+	return true
+}
+
+// 获取所有坐标
+func getAllAxis(row, col int, pairs []pair) {
+
+	pairs[0] = pair{
+		i: row - 2,
+		j: col - 1,
+	}
+	pairs[1] = pair{
+		i: row - 1,
+		j: col - 2,
+	}
+	pairs[2] = pair{
+		i: row + 1,
+		j: col - 2,
+	}
+	pairs[3] = pair{
+		i: row + 2,
+		j: col - 1,
+	}
+	pairs[4] = pair{
+		i: row + 2,
+		j: col + 1,
+	}
+	pairs[5] = pair{
+		i: row + 1,
+		j: col + 2,
+	}
+	pairs[6] = pair{
+		i: row - 1,
+		j: col + 2,
+	}
+	pairs[7] = pair{
+		i: row - 2,
+		j: col + 1,
+	}
+}
